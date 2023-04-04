@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -16,6 +17,10 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
+
+        FirebaseApp.initializeApp(applicationContext)
+
+
         val RegisterWelcome: Button = findViewById(R.id.register_welcome_btn)
         val LoginWelcome: Button = findViewById(R.id.login_welcome_btn)
         RegisterWelcome.setOnClickListener {
@@ -33,14 +38,11 @@ class WelcomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-      //  firebaseUser= FirebaseAuth.getInstance().currentUser
-
-       // if(firebaseUser != null)
-       // {
-         //   val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
-           // startActivity(intent)
-            //finish()
-       // }
+        if(firebaseUser != null)
+        {
+            val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
+               startActivity(intent)
+            finish()
+        }
     }
 }
